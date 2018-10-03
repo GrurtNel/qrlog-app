@@ -39,6 +39,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   onChange(checked, employee: Employee) {
+    console.log(this.selectedEmployees)
     if (checked) {
       this.confirmationService.confirm({
         message: 'Chọn quy trình',
@@ -46,10 +47,13 @@ export class CreateOrderComponent implements OnInit {
           //Actual logic to perform a confirmation
         },
         reject: () => {
+          console.log(this.selectedEmployees, employee.id)
+          console.log(this.selectedEmployees.findIndex(e => e == employee.id))
           this.selectedEmployees.splice(this.selectedEmployees.findIndex(e => e == employee.id), 1)
+          console.log(this.selectedEmployees)
         }
       })
-      this.selectedEmployeesTbl.push(<Resource>{})
+      // this.selectedEmployeesTbl.push(<Resource>{})
     } else {
       this.selectedEmployeesTbl.splice(this.selectedEmployeesTbl.findIndex(e => e.employee_id == employee.id), 1)
     }
@@ -58,6 +62,7 @@ export class CreateOrderComponent implements OnInit {
 
   onRegister() {
     console.log(this.selectedEmployees)
+    this.selectedEmployees = []
     // this.customerService.createOrder(this.order).subscribe(newOrder => {
     //   this.notify.success('Tạo đơn hàng thành công!')
     //   this.router.navigate([route.rootOrder])

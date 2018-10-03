@@ -27,6 +27,7 @@
         <label class="uk-form-label" for="form-horizontal-text">Chọn người làm</label>
         <div class="uk-form-controls">
           <p-checkbox name="groupname" value="{{employee.id}}" label="{{employee.name}}" [(ngModel)]="selectedEmployees" *ngFor="let employee of employees" (onChange)="onChange($event, employee)"></p-checkbox>
+          <span class="uk-badge" style="cursor: pointer;" *ngFor="let employee of employees" (click)="onConfirm(employee)">{{employee.name}}</span>
         </div>
       </div>
      
@@ -43,5 +44,5 @@
 </div>
 
 <p-confirmDialog header="Chọn công đoạn cho người dùng này" icon="pi pi-exclamation-triangle" width="425">
-
+  <p-checkbox name="groupname" value="{{employee.id}}" label="{{employee.name}}" [(ngModel)]="selectedEmployees" *ngFor="let employee of employees" (onChange)="onChange($event, employee)"></p-checkbox>
 </p-confirmDialog>
