@@ -1,0 +1,35 @@
+<div class="uk-container uk-padding">
+  <form class="uk-form-horizontal uk-margin-large" #f="ngForm">
+    <fieldset class="uk-fieldset">
+
+      <legend class="uk-legend uk-text-center">Thêm mới người dùng</legend>
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">Tên người dùng</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" type="text" required placeholder="Nhập tên người dùng" [(ngModel)]="employee.name" name="name">
+        </div>
+      </div>
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">Tên đăng nhập</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" type="text" required placeholder="Nhập tên người dùng" [(ngModel)]="employee.uname" name="uname">
+        </div>
+      </div>
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">Mật khẩu</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" type="text" required placeholder="Nhập mật khẩu" [(ngModel)]="employee.password" name="password">
+        </div>
+      </div>
+      
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-select"></label>
+        <div class="uk-form-controls">
+          <button class="uk-button uk-button-primary" [disabled]="!f.valid" (click)="onCreate()">Tạo người dùng</button>
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
+</div>

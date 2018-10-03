@@ -1,0 +1,42 @@
+
+<!-- panel -->
+<div class=" uk-width-1-1@l uk-width-1-1@xl">
+    <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+      <div class="uk-card-header">
+        <div class="uk-grid uk-grid-small">
+          <div class="uk-width-auto"><h4 class="uk-margin-remove-bottom">Danh sách khách hàng</h4></div>
+          <div class="uk-width-expand uk-text-right">
+            <a href="#" class="uk-icon-link uk-margin-small-right" data-uk-icon="icon: move"></a>
+            <a href="#" class="uk-icon-link uk-margin-small-right" data-uk-icon="icon: cog"></a>
+            <a href="#" class="uk-icon-link" data-uk-icon="icon: close"></a>
+          </div>
+        </div>
+      </div>
+      <div class="uk-card-body">
+        <div class="uk-overflow-auto">
+          <div class="uk-placeholder uk-text-center" *ngIf="!customers">
+            Hiện không có khách hàng nào
+          </div>
+        <table class="uk-table uk-table-hover uk-table-divider uk-table-middle" *ngIf="customers">
+          <thead>
+            <tr>
+              <th>Tên khách hàng</th>
+              <th>Tên công ty</th>
+              <th>Số điện thoại</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let customer of customers">
+              <td>{{customer.name}}</td>
+              <td>{{customer.company_name}}</td>
+              <td>{{customer.phone}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <a [routerLink]="['register']" class="uk-button uk-button-primary uk-margin">Thêm mới</a>
+      </div>
+    </div>
+  </div>
+  <!-- /panel -->
+  

@@ -1,0 +1,41 @@
+
+<!-- panel -->
+<div class=" uk-width-1-1@l uk-width-1-1@xl">
+  <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+    <div class="uk-card-header">
+      <div class="uk-grid uk-grid-small">
+        <div class="uk-width-auto"><h4 class="uk-margin-remove-bottom">Quản lí công đoạn</h4></div>
+        <div class="uk-width-expand uk-text-right"> 
+          <a href="#" class="uk-icon-link uk-margin-small-right" data-uk-icon="icon: refresh"></a>
+        </div>
+      </div>
+    </div>
+    <div class="uk-card-body">
+      <div class="uk-overflow-auto">
+          <form class="uk-form-horizontal uk-margin-large" #f="ngForm">
+              <fieldset class="uk-fieldset">
+                <legend class="uk-legend uk-text-center">Quản lí công đoạn</legend>
+                <div class="uk-margin">
+                  <label class="uk-form-label" for="form-horizontal-text">Tên công đoạn</label>
+                  <div class="uk-form-controls">
+                    <input class="uk-input" type="text" required placeholder="Nhập tên công đoạn" #name>
+                  </div>
+                </div>
+                <div class="uk-margin">
+                  <label class="uk-form-label" for="form-horizontal-select"></label>
+                  <div class="uk-form-controls">
+                    <button class="uk-button uk-button-primary" [disabled]="!f.valid" (click)="onCreate(name.value)">Tạo công đoạn</button>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+        <ul class="uk-list uk-list-striped">
+          <li *ngFor="let process of processes">
+            {{process.name}} 
+            <span class="uk-margin-small-right uk-align-right" uk-icon="trash"></span></li>
+      </ul>
+    </div>
+    </div>
+  </div>
+</div>
+<!-- /panel -->

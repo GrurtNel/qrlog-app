@@ -1,0 +1,47 @@
+<div class="uk-container uk-padding">
+  <form class="uk-form-horizontal uk-margin-large" #f="ngForm">
+    <fieldset class="uk-fieldset">
+
+      <legend class="uk-legend uk-text-center">Thêm mới đơn hàng</legend>
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">Tên đơn hàng</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" type="text" required placeholder="Nhập tên đơn hàng" [(ngModel)]="order.name" name="name">
+        </div>
+      </div>
+      
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">Số lượng</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" type="number" placeholder="Nhập số lượng" required [(ngModel)]="order.quantity" name="quantity">
+        </div>
+      </div>
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">Deadline</label>
+        <div class="uk-form-controls">
+          <p-calendar [(ngModel)]="order.deadline" [showTime]="true" name="deadline" required="true"></p-calendar>
+        </div>
+      </div>
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">Chọn người làm</label>
+        <div class="uk-form-controls">
+          <p-checkbox name="groupname" value="{{employee.id}}" label="{{employee.name}}" [(ngModel)]="selectedEmployees" *ngFor="let employee of employees" (onChange)="onChange($event, employee)"></p-checkbox>
+        </div>
+      </div>
+     
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-select"></label>
+        <div class="uk-form-controls">
+          <button class="uk-button uk-button-primary" [disabled]="!f.valid" (click)="onRegister()">Tạo đơn hàng</button>
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
+  <hr/>
+</div>
+
+<p-confirmDialog header="Chọn công đoạn cho người dùng này" icon="pi pi-exclamation-triangle" width="425">
+
+</p-confirmDialog>

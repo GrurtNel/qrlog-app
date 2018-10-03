@@ -1,0 +1,59 @@
+<div class="uk-container uk-padding">
+  <form class="uk-form-horizontal uk-margin-large" #f="ngForm">
+    <fieldset class="uk-fieldset">
+  
+        <legend class="uk-legend uk-text-center">Đăng kí thông tin</legend>
+  
+        <div class="uk-margin">
+          <label class="uk-form-label" for="form-horizontal-text">Họ tên khách hàng</label>
+          <div class="uk-form-controls">
+              <input class="uk-input"  type="text" placeholder="Nhập họ tên" ngModel name="name">
+          </div>
+        </div>
+        <div class="uk-margin">
+          <label class="uk-form-label" for="form-horizontal-text">Email</label>
+          <div class="uk-form-controls">
+              <input class="uk-input"  type="text" placeholder="Nhập email" ngModel name="email">
+          </div>
+        </div>
+        <div class="uk-margin">
+          <label class="uk-form-label" for="form-horizontal-text">Số điện thoại</label>
+          <div class="uk-form-controls">
+              <input class="uk-input"  type="text" placeholder="Nhập số điện thoại" ngModel name="phone">
+          </div>
+        </div>
+        <div class="uk-margin">
+          <label class="uk-form-label" for="form-horizontal-text">Mật khẩu</label>
+          <div class="uk-form-controls">
+              <input class="uk-input"  type="password" placeholder="Nhập mật khẩu" ngModel name="password">
+          </div>
+        </div>
+        <div class="uk-margin">
+          <label class="uk-form-label" for="form-horizontal-text">Tên công ty</label>
+          <div class="uk-form-controls">
+              <input class="uk-input"  type="text" placeholder="Nhập tên công ty" ngModel name="company_name">
+          </div>
+        </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-horizontal-text">Logo công ty</label>
+            <div class="uk-form-controls">
+                <input class="uk-input"   type="file" placeholder="Nhập tên công ty"  (change)="uploadFile($event)">
+                <progress id="js-progressbar" class="uk-progress" value="{{uploadPercent|async}}" max="100"></progress>
+            </div>
+          </div>
+        <div class="uk-margin">
+          <label class="uk-form-label" for="form-horizontal-text">Thông tin công ty</label>
+          <div class="uk-form-controls">
+              <p-editor ngModel [style]="{'height':'320px'}" name="information"></p-editor>
+          </div>
+        </div>
+      <div class="uk-margin">
+          <label class="uk-form-label" for="form-horizontal-select"></label>
+          <div class="uk-form-controls">
+              <button class="uk-button uk-button-primary" (click)="onRegister(f)">Đăng kí</button>
+          </div>
+      </div>
+  
+    </fieldset>
+  </form>
+</div>

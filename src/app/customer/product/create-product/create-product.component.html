@@ -1,0 +1,50 @@
+<div class="uk-container uk-padding">
+    <form class="uk-form-horizontal uk-margin-large" #f="ngForm">
+      <fieldset class="uk-fieldset">
+    
+          <legend class="uk-legend uk-text-center">Thêm mới sản phẩm</legend>
+    
+          <div class="uk-margin">
+            <label class="uk-form-label" for="form-horizontal-text">Tên sản phẩm</label>
+            <div class="uk-form-controls">
+                <input class="uk-input"  type="text" placeholder="Nhập tên sản phẩm" ngModel name="name">
+            </div>
+          </div>
+          <div class="uk-margin">
+            <label class="uk-form-label" for="form-horizontal-text">Ảnh sản phẩm</label>
+            <div class="uk-form-controls">
+                <div class="uk-child-width-1-5 uk-thumbnav" uk-grid>
+                    <div *ngFor="let item of imagesPath;let i = index" (click)="file.click();imageIndex=i">
+                        <img src="{{downloadURLs[i]?downloadURLs[i]:'/assets/image/ic_upload.png'}}" class="uk-thumbnail" alt="">
+                    </div>
+                </div>
+                
+                <!-- <div class="uk-child-width-expand@s uk-text-center" uk-grid>
+                    <div *ngFor="let item of imagesPath;let i = index">
+                        <div class="uk-placeholder" (click)="file.click();imageIndex=i" [ngStyle]="{background:downloadURLs[i] ? downloadURLs[i] : 'none'}">
+                          <span *ngIf="!downloadURLs[i]">+</span>
+                          <img src="{{downloadURLs[i]}}" alt=""  *ngIf="downloadURLs[i]">
+                        </div>
+                    </div>
+                </div> -->
+                <progress id="js-progressbar" class="uk-progress" value="{{uploadPercent|async}}" max="100"></progress>
+            </div>
+            <input class="uk-input" style="display: none;" #file  type="file" placeholder="Nhập tên công ty"  (change)="uploadFile($event)">
+          </div>
+          
+          <div class="uk-margin">
+            <label class="uk-form-label" for="form-horizontal-text">Thông tin sản phẩm</label>
+            <div class="uk-form-controls">
+                <p-editor ngModel [style]="{'height':'320px'}" name="description"></p-editor>
+            </div>
+          </div>
+        <div class="uk-margin">
+            <label class="uk-form-label" for="form-horizontal-select"></label>
+            <div class="uk-form-controls">
+                <button class="uk-button uk-button-primary" (click)="onRegister(f)">Thêm sản phẩm</button>
+            </div>
+        </div>
+    
+      </fieldset>
+    </form>
+  </div>

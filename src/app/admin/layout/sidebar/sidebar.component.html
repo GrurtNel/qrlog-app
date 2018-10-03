@@ -1,0 +1,24 @@
+<div id="sidebar" class="tm-sidebar-left uk-background-default">
+    <div class="text-center">
+        <div class="user">
+            <img id="avatar" width="100" class="uk-border-circle" src="assets/image/admin.png" />
+            <div class="uk-margin-top"></div>
+            <div id="name" class="uk-text-truncate">Xin chào</div>
+            <div id="email" class="uk-text-truncate">Admin</div>
+            <span id="status" data-enabled="true" data-online-text="Online" data-away-text="Away" data-interval="10000" class="uk-margin-top uk-label uk-label-success"></span>
+        </div>
+        <br/>
+      </div>
+    <ul class="uk-nav uk-nav-default">
+        <li class="uk-nav-header">
+            Menu
+        </li>
+        <li><a [routerLink]="['customer']"><span class="uk-margin-small-right" data-uk-icon="icon: user"></span> Khách hàng</a></li>
+      <li><a [routerLink]="['order']"><span class="uk-margin-small-right" data-uk-icon="icon: list"></span>Đơn hàng</a></li>
+
+      <li><a [routerLink]="['product']"><span class="uk-margin-small-right" data-uk-icon="icon: tv"></span> Sản phẩm</a></li>
+      <!-- <li class="uk-nav-divider"></li> -->
+      <li><a href="login-dark.html"><span class="uk-margin-small-right" data-uk-icon="icon: comments"></span>Theo dõi đơn hàng</a></li>
+      <li style="cursor: pointer;" (click)="onLogout()"><span class="uk-margin-small-right" data-uk-icon="icon: sign-in" ></span>Đăng xuất</li>
+    </ul>
+  </div>

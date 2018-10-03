@@ -1,0 +1,50 @@
+<div class="uk-container uk-padding">
+  <form class="uk-form-horizontal uk-margin-large" #f="ngForm">
+    <fieldset class="uk-fieldset">
+
+      <legend class="uk-legend uk-text-center">Thêm mới đơn hàng</legend>
+
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">Tên đơn hàng</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" type="text" required placeholder="Nhập tên đơn hàng" [(ngModel)]="order.name" name="name">
+        </div>
+      </div>
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">Kiểu QR-Code</label>
+        <div class="uk-form-controls">
+          <select class="uk-select" [(ngModel)]="order.type" name="type">
+            <option [value]="type.type" *ngFor="let type of types">{{type.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="uk-margin"  *ngIf="order.type!=='qrcode-type1'">
+        <label class="uk-form-label" for="form-horizontal-text">Chọn sản phẩm</label>
+        <div class="uk-form-controls">
+          <select class="uk-select" [(ngModel)]="order.product_id" name="product_id">
+            <option [value]="product.id" *ngFor="let product of productSelect">{{product.name}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="uk-margin" *ngIf="order.type==='qrcode-type1'">
+        <label class="uk-form-label" for="form-horizontal-text">Url</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" type="text" placeholder="Nhập url" required [(ngModel)]="order.url" name="url">
+        </div>
+      </div>
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-text">Số lượng in</label>
+        <div class="uk-form-controls">
+          <input class="uk-input" type="number" placeholder="Nhập số lượng in" required [(ngModel)]="order.quantity" name="quantity">
+        </div>
+      </div>
+      <div class="uk-margin">
+        <label class="uk-form-label" for="form-horizontal-select"></label>
+        <div class="uk-form-controls">
+          <button class="uk-button uk-button-primary" [disabled]="!f.valid" (click)="onRegister()">Tạo đơn hàng</button>
+        </div>
+      </div>
+
+    </fieldset>
+  </form>
+</div>

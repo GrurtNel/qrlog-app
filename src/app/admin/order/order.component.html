@@ -1,0 +1,64 @@
+
+<!-- panel -->
+<div class=" uk-width-1-1@l uk-width-1-1@xl">
+    <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+      <div class="uk-card-header">
+        <div class="uk-grid uk-grid-small">
+          <div class="uk-width-auto"><h4 class="uk-margin-remove-bottom">Danh sách đơn hàng</h4></div>
+          <div class="uk-width-expand uk-text-right">
+            <a href="#" class="uk-icon-link uk-margin-small-right" data-uk-icon="icon: refresh"></a>
+          </div>
+        </div>
+      </div>
+      <div class="uk-card-body">
+          <div class="uk-margin">
+              <div class="uk-width-1-2">
+                  <select class="uk-select uk-width-2-3" #filterCustomer>
+                      <option value="">Chọn khách hàng</option>
+                      <option value="{{customer.id}}" *ngFor="let customer of customers">{{customer.company_name}}</option>
+                  </select>
+                  <button class="uk-button uk-button-primary" (click)="onFilter(filterCustomer.value)">Lọc</button>
+              </div>
+            </div>
+        <div class="uk-overflow-auto">
+          <div class="uk-placeholder uk-text-center" *ngIf="!orders">
+            Hiện không có đơn hàng nào
+          </div>
+        <table class="uk-table uk-table-hover uk-table-divider uk-table-middle" *ngIf="orders">
+          <thead>
+            <tr>
+              <th>Tên đơn hàng</th>
+              <th>Loại QRCode</th>
+              <th>Số lượng</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orders">
+              <td><a [routerLink]="['/detail']">{{order.name}}</a></td>
+              <td>{{qrcodeTypesMap[order.type]}}</td> 
+              <td>{{order.quantity}}</td>
+              <td>
+                  <span class="uk-badge" style="cursor: pointer;" *ngIf="!order.activated" (click)="onDelivery(order)">Phân phối</span>
+                  <a href="#modal-center" uk-toggle class="uk-badge uk-success"  style="cursor: pointer;position: relative;" (click)="selectedOrder = order" *ngIf="order.type!=='qrcode-marketing'">Xuất CSV</a>
+                  <span    style="cursor: pointer;" *ngIf="order.type==='qrcode-marketing'">{{endpoint+order.id}}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- <a [routerLink]="['create']" class="uk-button uk-button-primary uk-margin">Thêm mới</a> -->
+      <a [routerLink]="['create/'+filterCustomer.value]" class="uk-button uk-button-primary uk-margin" *ngIf="filterCustomer.value!==''">Thêm mới</a>
+      </div>
+    </div>
+  </div>
+  <!-- /panel -->
+  <div id="modal-center" class="uk-flex-top" uk-modal>
+      <div class="uk-modal-dialog uk-modal-body uk-margin-auto-vertical">
+          <button class="uk-modal-close-default" type="button" uk-close></button>
+          <input class="uk-input uk-width-1-1" type="number" placeholder="Nhập số lượng in" [(ngModel)]="quantity">
+          <div class="uk-width-1-1 uk-text-center uk-margin">
+              <button class="uk-button uk-button-primary uk-button-small" (click)="onGenerateCSV()">Xuất CSV</button>
+          </div>
+      </div>
+  </div>

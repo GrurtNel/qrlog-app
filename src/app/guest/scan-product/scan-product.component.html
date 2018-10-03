@@ -1,0 +1,110 @@
+
+<!-- panel -->
+<div class=" uk-width-1-1@l uk-width-1-1@xl">
+    <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+      <div class="uk-card-header uk-background-primary">
+        <div class="uk-grid uk-grid-small">
+          <div class="uk-width-auto"><h4 class="uk-margin-remove-bottom" style="color: white">Kiểm tra sản phẩm</h4></div>
+        </div>
+      </div>
+      <div class="uk-card-body  {{isVerify?'':'uk-flex uk-flex-middle'}}" [style.height]="isVerify?'auto':'calc(100vh - 55px)'">
+        <div class="uk-overflow-auto">
+            <div class="uk-text-center">
+                <img src="assets/image/scan_product.png" alt="" *ngIf="!isVerify">
+                <img src="assets/image/check-mark.png" alt="" *ngIf="isVerify">
+            </div>
+            <div class="uk-text-center uk-margin" *ngIf="!isVerify">
+                <div class="uk-margin">
+                    <input class="uk-input uk-form-width-small" type="text" [disabled]="qrcodeType==='qrcode-type1'" name="code" [(ngModel)]="code">
+                    <button class="uk-button uk-button-primary uk-margin" (click)="verifyProduct()">Xác nhận</button>
+                </div>
+            </div>
+            <div class="uk-alert-warning" uk-alert *ngIf="!isVerify && qrcodeType==='qrcode-type2'">
+                <p>Vui lòng nhập mã thẻ cào trên tem sản phẩm để kiểm tra nguồn gốc sản phẩm.</p>
+            </div>
+            <div class="uk-alert-warning" uk-alert *ngIf="!isVerify  && qrcodeType==='qrcode-type1'">
+                <p>Đối chiếu mã trên với mã thẻ cào trên tem QR code sau đó ấn xác nhận.</p>
+            </div>
+            <div class="uk-alert-success" uk-alert *ngIf="isVerify">
+                <p>Sản phẩm bạn mua là sản phẩm chính hãng được xác thực bởi trung tâm chống hàng giả.</p>
+            </div>
+            <div class="uk-text-center uk-margin" *ngIf="isVerify">
+                <table class="uk-table uk-table-justify uk-table-divider">
+                    <thead>
+                        <tr>
+                            <th class="uk-width-small">Số lượt quét</th>
+                            <th class="uk-text-right">{{scanInfo.number_of_scan}}</th>
+                        </tr>
+                        <tr>
+                            <th class="uk-width-small">Quét lần đầu lúc</th>
+                            <th class="uk-text-right"> {{scanInfo.verify_at*1000|date:'medium'}}</th>
+                        </tr>
+                        <tr>
+                            <th class="uk-width-small">Quét lần đầu tại</th>
+                            <th class="uk-text-right">Hà Nội</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /panel -->
+<!-- panel -->
+<div class=" uk-width-1-1@l uk-width-1-1@xl" *ngIf="isVerify">
+    <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+      <div class="uk-card-header uk-background-primary">
+        <div class="uk-grid uk-grid-small">
+          <div class="uk-width-auto"><h4 class="uk-margin-remove-bottom" style="color: white">Thông tin sản phẩm</h4></div>
+        </div>
+      </div>
+      <div class="uk-card-body">
+        <div class="uk-overflow-auto">
+            <article class="uk-article">
+                <p class="uk-text-lead">{{product.name}}</p>
+            </article>
+            <div uk-slider="center: true" class="uk-margin">
+                <div class="uk-position-relative uk-visible-toggle uk-light">
+                    <ul class="uk-slider-items uk-child-width-1-2@s uk-grid">
+                        <li *ngFor="let image of product.gallery">
+                            <div class="uk-card uk-card-default">
+                                <div class="uk-card-media-top">
+                                    <img src="{{image}}" alt="">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <a class="uk-position-center-left uk-position-small uk-hidden-hover" href="#" uk-slidenav-previous uk-slider-item="previous"></a>
+                    <a class="uk-position-center-right uk-position-small uk-hidden-hover" href="#" uk-slidenav-next uk-slider-item="next"></a>
+                </div>
+                <ul class="uk-slider-nav uk-dotnav uk-flex-center uk-margin"></ul>
+            </div>
+            <div [innerHTML]="product.description"></div>
+            
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- /panel -->
+  <!-- panel -->
+<div class=" uk-width-1-1@l uk-width-1-1@xl" *ngIf="isVerify">
+    <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+      <div class="uk-card-header uk-background-primary">
+        <div class="uk-grid uk-grid-small">
+          <div class="uk-width-auto"><h4 class="uk-margin-remove-bottom" style="color: white">Thông tin nhà cung cấp</h4></div>
+        </div>
+      </div>
+      <div class="uk-card-body">
+        <div class="uk-overflow-auto">
+                <article class="uk-article">
+                    <p class="uk-text-lead">{{customer.company_name}}</p>
+                    <div [innerHTML]="customer.information"></div>
+                </article>
+        </div>
+      </div>
+    </div>
+    <a href="tel:{{customer.phone}}"><img src="assets/image/telephone-call.png" alt="" style="position: fixed;bottom:16px;right:16px"></a>
+            
+  </div>
+  <!-- /panel -->
