@@ -10,7 +10,7 @@
           <input class="uk-input" type="text" required placeholder="Nhập tên đơn hàng" [(ngModel)]="order.name" name="name">
         </div>
       </div>
-      
+
       <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">Số lượng</label>
         <div class="uk-form-controls">
@@ -26,15 +26,36 @@
       <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-text">Chọn người làm</label>
         <div class="uk-form-controls">
-          <p-checkbox name="groupname" value="{{employee.id}}" label="{{employee.name}}" [(ngModel)]="selectedEmployees" *ngFor="let employee of employees" (onChange)="onChange($event, employee)"></p-checkbox>
-          <span class="uk-badge" style="cursor: pointer;" *ngFor="let employee of employees" (click)="onConfirm(employee)">{{employee.name}}</span>
+
+          <select class="uk-select uk-margin" [(ngModel)]="selectedEmployeeIndex" name="product_id">
+            <option *ngFor="let employee of employees;let i = index" [value]="i">{{employee.name}}</option>
+          </select>
+          <p-checkbox name="groupname" value="{{i}}" label="{{process.name}}"  [(ngModel)]="selectedProcessIndex" *ngFor="let process of processes;let i = index"></p-checkbox>
+          <br/>
+          <button class="uk-button uk-button-primary uk-margin" [disabled]="selectedProcessIndex.length==0" (click)="onSelectEmployee()">Chọn</button>
+          <table class="uk-table" *ngIf="selectedEmployeesResource.length>0">
+            <thead>
+              <tr>
+                <th>Tên người làm</th>
+                <th>Công đoạn</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let empr of selectedEmployeesResource;let i = index">
+                <td>{{empr.employee.name}}</td>
+                <td><span *ngFor="let p of empr.processes;let i = index">{{p.name}}, </span></td>
+                <td><button class="uk-button uk-button-danger" (click)="onDeleteEmployee(i)">Xóa</button></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
-     
+
       <div class="uk-margin">
         <label class="uk-form-label" for="form-horizontal-select"></label>
         <div class="uk-form-controls">
-          <button class="uk-button uk-button-primary" [disabled]="!f.valid" (click)="onRegister()">Tạo đơn hàng</button>
+          <button class="uk-button uk-button-primary" [disabled]="!f.valid" (click)="onCreateOrder()">Tạo đơn hàng</button>
         </div>
       </div>
 
@@ -42,7 +63,3 @@
   </form>
   <hr/>
 </div>
-
-<p-confirmDialog header="Chọn công đoạn cho người dùng này" icon="pi pi-exclamation-triangle" width="425">
-  <p-checkbox name="groupname" value="{{employee.id}}" label="{{employee.name}}" [(ngModel)]="selectedEmployees" *ngFor="let employee of employees" (onChange)="onChange($event, employee)"></p-checkbox>
-</p-confirmDialog>

@@ -1,5 +1,7 @@
+import { EmployeeResource } from './../../../shared/models/employee.model';
+import { Process } from './../../../shared/models/process.model';
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { NgForm, FormGroup, FormArray, FormControl } from '@angular/forms';
 import { qrcodeTypes, route } from '../../../common/constant.common';
 import { OrderService } from '../order.service';
 import { AuthService } from '../../../x/http/auth.service';
@@ -19,10 +21,12 @@ import { ConfirmationService } from 'primeng/api';
 export class CreateOrderComponent implements OnInit {
   order = <Order>{}
   employees = []
-  proccesses = []
-  selectedEmployees = []
+  processes = <Process[]>[]
   selectedProcesses = []
-  selectedEmployeesTbl = <Resource[]>[]
+  selectedProcessIndex = []
+  selectedEmployees = []
+  selectedEmployeeIndex = 0
+  selectedEmployeesResource = <EmployeeResource[]>[]
   constructor(
     private customerService: CustomerService,
     private router: Router,
@@ -36,36 +40,49 @@ export class CreateOrderComponent implements OnInit {
         this.employees = res
       }
     })
+
+    this.customerService.getProcesses().subscribe(process => {
+      if (process != null) {
+        this.processes = process
+      }
+    })
   }
 
-  onChange(checked, employee: Employee) {
-    console.log(this.selectedEmployees)
-    if (checked) {
-      this.confirmationService.confirm({
-        message: 'Chọn quy trình',
-        accept: () => {
-          //Actual logic to perform a confirmation
-        },
-        reject: () => {
-          console.log(this.selectedEmployees, employee.id)
-          console.log(this.selectedEmployees.findIndex(e => e == employee.id))
-          this.selectedEmployees.splice(this.selectedEmployees.findIndex(e => e == employee.id), 1)
-          console.log(this.selectedEmployees)
-        }
-      })
-      // this.selectedEmployeesTbl.push(<Resource>{})
-    } else {
-      this.selectedEmployeesTbl.splice(this.selectedEmployeesTbl.findIndex(e => e.employee_id == employee.id), 1)
-    }
-    console.log(this.selectedEmployeesTbl)
+  onSelectEmployee() {
+    this.selectedProcesses = this.selectedProcessIndex.map(index => {
+      return this.processes[index]
+    })
+    this.selectedEmployeesResource.push(<EmployeeResource>{
+      employee: this.employees[this.selectedEmployeeIndex],
+      processes: this.selectedProcesses
+    })
+    //xoa employee sau khi chon va clear checkbox chon cong doan
+    this.employees.splice(this.selectedEmployeeIndex, 1)
+    this.selectedProcessIndex = []
+    console.log(this.selectedEmployeesResource)
   }
 
-  onRegister() {
-    console.log(this.selectedEmployees)
-    this.selectedEmployees = []
-    // this.customerService.createOrder(this.order).subscribe(newOrder => {
-    //   this.notify.success('Tạo đơn hàng thành công!')
-    //   this.router.navigate([route.rootOrder])
-    // })
+  onDeleteEmployee(i) {
+    this.employees.push(this.selectedEmployeesResource[i].employee)
+    this.selectedEmployeesResource.splice(i, 1)
   }
+
+  onCreateOrder() {
+    const resource = this.selectedEmployeesResource.map(item => {
+      return <Resource>{
+        employee_id: item.employee.id, process_id: item.processes.map(process => {
+          return process.id
+        })
+      }
+    })
+    this.order.resources = resource
+    const deadlineStr = this.order.deadline
+    this.order.deadline = new Date(deadlineStr).getTime()
+    this.order.deadline = new Date(this.order.deadline).getTime()
+    this.customerService.createOrder(this.order).subscribe(newOrder => {
+      this.notify.success('Tạo đơn hàng thành công!')
+      this.router.navigate([route.rootOrder])
+    })
+  }
+
 }

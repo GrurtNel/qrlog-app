@@ -1,3 +1,5 @@
+import { Employee } from './employee.model';
+import { Process } from './process.model';
 export interface Employee {
     id: string
     name: string
@@ -7,6 +9,8 @@ export interface Employee {
 }
 
 export interface EmployeeResource {
-    employee_id: string
-    processes: string[]
+    employee: Employee
+    employee_name: string
+    processes: Process[]
+    processesName: string[]
 }
