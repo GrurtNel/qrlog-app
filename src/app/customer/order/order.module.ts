@@ -12,6 +12,7 @@ import { OrderService } from './order.service';
 import { CalendarModule } from 'primeng/calendar';
 import { UpdateOrderComponent } from './update-order/update-order.component';
 import { CustomerService } from '../customer.service';
+import { NewOrderComponent } from './new-order/new-order.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,8 @@ import { CustomerService } from '../customer.service';
   declarations: [
     CreateOrderComponent,
     OrderComponent,
-    UpdateOrderComponent
+    UpdateOrderComponent,
+    NewOrderComponent
   ],
   providers: [
     OrderService,

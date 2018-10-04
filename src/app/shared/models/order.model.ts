@@ -4,6 +4,7 @@ export interface Order {
     customer_id: string
     quantity: number
     deadline: number
+    processes: string[]
     resources: Resource[]
 }
 
