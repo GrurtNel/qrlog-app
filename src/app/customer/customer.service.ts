@@ -31,6 +31,14 @@ export class CustomerService {
         return this.httpService.Post(apiURL.createOrderByCustomer, o)
     }
 
+    getOrderHistory(orderID: string) {
+        return this.httpService.Get(apiURL.getOrderHistory, { order_id: orderID })
+    }
+
+    getOrderTracking(orderID: string) {
+        return this.httpService.Get(apiURL.getOrderTracking, { order_id: orderID })
+    }
+
     getProcesses() {
         return this.httpService.Get(apiURL.getProcessesByCustomer)
     }

@@ -11,7 +11,7 @@ const routes: Routes = [
       { path: 'profile', component: ProfileComponent },
       { path: 'employee', loadChildren: './employee/employee.module#EmployeeModule' },
       { path: 'order', loadChildren: './order/order.module#OrderModule' },
-      { path: 'proccess', component: ProccessComponent },
+      { path: 'process', component: ProccessComponent },
       { path: '', component: DashboardComponent },
     ]
   }

@@ -1,0 +1,41 @@
+<!-- panel -->
+<div class=" uk-width-1-1@l uk-width-1-1@xl">
+  <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+    <div class="uk-card-header">
+      <div class="uk-grid uk-grid-small">
+        <div class="uk-width-auto">
+          <h4 class="uk-margin-remove-bottom">Lịch sử đơn hàng</h4>
+        </div>
+        <div class="uk-width-expand uk-text-right">
+          <a href="#" class="uk-icon-link uk-margin-small-right" data-uk-icon="icon: refresh"></a>
+        </div>
+      </div>
+    </div>
+    <div class="uk-card-body">
+      <div class="uk-overflow-auto">
+        <!-- <div class="uk-placeholder uk-text-center" *ngIf="!orders">
+            Hiện không có đơn hàng nào!!!
+          </div> -->
+        <table class="uk-table uk-table-hover uk-table-divider uk-table-middle">
+          <thead>
+            <tr>
+              <th>Tên công đoạn</th>
+              <th>Người thực hiện</th>
+              <th>Thời gian</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let order of orderHistories;let i=index">
+              <td>{{order.process_name}}</td>
+              <td>{{order.employee_name}}</td>
+              <td>
+                {{order.ctime*1000|date:'short'}}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /panel -->

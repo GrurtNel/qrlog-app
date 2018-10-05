@@ -1,0 +1,53 @@
+<!-- panel -->
+<div class=" uk-width-1-1@l uk-width-1-1@xl">
+  <div class="uk-card uk-card-default uk-card-small uk-card-hover">
+    <div class="uk-card-header">
+      <div class="uk-grid uk-grid-small">
+        <div class="uk-width-auto">
+          <h4 class="uk-margin-remove-bottom">Đơn hàng {{order.name}}</h4>
+        </div>
+        <div class="uk-width-expand uk-text-right">
+          <a href="#" class="uk-icon-link uk-margin-small-right" data-uk-icon="icon: refresh"></a>
+        </div>
+      </div>
+    </div>
+    <div class="uk-card-body">
+      <div class="uk-overflow-auto">
+        <table  class="uk-table uk-table-hover uk-table-divider uk-table-middle">
+          <tr>
+            <td style="width: 30%">Deadline</td>
+            <td>{{order.deadline|date:'short'}}</td>
+          </tr>
+          <tr>
+            <td>Số lượng</td>
+            <td>{{order.quantity}}</td>
+          </tr>
+          <tr>
+            <td>Tiến độ</td>
+            <td></td>
+          </tr>
+        </table>
+        <table class="uk-table uk-table-hover uk-table-divider uk-table-middle">
+          <thead>
+            <tr>
+              <th>Tên công đoạn</th>
+              <th>Số lượng</th>
+              <th>Trạng thái</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tracking of orderTrackings;let i=index">
+              <td>{{tracking.process_name}}</td>
+              <td>{{tracking.count}}</td>
+              <td>
+                <progress class="uk-progress" value="{{tracking.count}}" max="{{order.quantity}}"></progress>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- /panel -->

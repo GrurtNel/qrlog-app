@@ -32,8 +32,11 @@ export const apiURL = {
     getProcessesByCustomer: getUrl('customer/process/list'),
     createProcessByCustomer: getUrl('customer/process/create'),
     createOrderByCustomer: getUrl('customer/order/create'),
+    getOrderHistory: getUrl('customer/order/history'),
+    getOrderTracking: getUrl('customer/order/tracking'),
     createEmployee: getUrl('customer/employee/create'),
     scanProducts: getUrl('public/product/scan'),
+    generateCSV: getUrl('customer/order/generate'),
     //order
     getOrders: getUrl('customer/order/list'),
     deleteOrder: getUrl('customer/order/delete'),
@@ -48,7 +51,7 @@ export const apiURL = {
     deliveryOrder: getUrl('admin/order/delivery'),
     createOrder: getUrl('admin/order/create'),
     getAllOrders: getUrl('admin/order/list'),
-    generateCSV: getUrl('admin/order/generate'),
+
 }
 
 function getUrl(endPoint: string) {
